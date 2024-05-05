@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Frase Casuale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Frase Casuale</h1>
+        <button id="btnGeneraFrase">Genera Frase Casuale</button>
+        <p id="fraseCasuale"></p>
+    </div>
+    <br> <br> <br> <br>
+    <div class="row">
+        <div class="col-md-3">
+            <h1>Romantic</h1>
+            <button id="btnGeneraFraseR">Genera Frase</button>
+            <p id="fraseCasualeR"></p>
+        </div>
+        <div class="col-md-3">
+            <h1>Serious</h1>
+            <button id="btnGeneraFraseS">Genera Frase</button>
+            <p id="fraseCasualeS"></p>
+        </div>
+        <div class="col-md-3">
+            <h1>Fun</h1>
+            <button id="btnGeneraFraseF">Genera Frase</button>
+            <p id="fraseCasualeF"></p>
+        </div>
+        <div class="col-md-3">
+            <h1>Cute</h1>
+            <button id="btnGeneraFraseC">Genera Frase</button>
+            <p id="fraseCasualeC"></p>
+        </div>
+    </div>
+
+    <script>
+        // Array di frasi
+        var frasi = [
+            "Who is your role model and why?",
+            "What’s the worst decision you’ve ever made?",
+            "What makes you the happiest version of yourself?",
+            "What do you want your future to look like?",
+            "How do you define success?",
+            "Does the idea of getting older scare you?",
+            "What was your child hood like?",
+            "What do you do when you’re stressed?",
+            "Where is your happy place?",
+            "What’s your biggest fear and have you ever faced it?",
+            "What’s the biggest risk you’ve ever taken?",
+            "Is there anything you’re too afraid to try?",
+            "Do you have a favourite childhood memory?",
+            "What do you consider your greatest accomplishment so far?",
+            "What do you wish people knew about you?",
+            "What do you think love is?",
+            "Is there a question you’ve always wanted to ask me?",
+            "What’s the most surprising conversation you’ve had with a stranger?",
+            "What’s something you learned early on in life that you don’t think other people usually do?",
+            "What’s your best relationship advice?",
+            "Are you comfortable telling people when they do something offensive?",
+            "What do your parents expect of your partner?",
+            "What makes you feel safe?",
+            "Who are you closest to?",
+            "How do you show appreciation for people?",
+            "What’s your love language?",
+            "When did you know you wanted to be in a relationship with me?",
+            "Do you think people were “made for each other”?",
+            "What’s your guilty pleasure?",
+            "What is the most attractive thing someone can do, in your opinion?",
+            "What’s your favourite date night movie?",
+            "How do you feel about public dispaly of affection?",
+            "How do big displays of affection make you feel?",
+            "What is your favourite love song?",
+            "What does your ideal date look like?",
+            "What’s your favourite memory of us?",
+            "Do you want to get married someday?",
+            "If you do, what does your dream wedding look like?",
+            "Do you prefer fancy date nights or casual nights out?",
+            "Is there a song that reminds you of us?",
+            "When do you feel the most beautiful?",
+            "What’s your favourite type of kiss?",
+            "What do I do that makes you smile?",
+            "How do you describe me to your friends?",
+            "What’s something I used to do that you miss?",
+            "What does falling in love feel like to you?",
+            "What’s the first thing you thought when we met?",
+            "What does romance mean to you?",
+            "How would you tell our love story?",
+            "What’s your communication style?",
+            "How do you see our future playing out?",
+            "What is your favourite part of our relationship? And least favourite?",
+            "What do you want to do when you’re older?",
+            "Is there anything you would have changed about your childhood?",
+            "Does anything give you an instant headache?",
+            "Have you ever run away from a situation? What did that look like?",
+            "If you could live anywhere in the world, where would you choose?",
+            "What are your physical and emotional boundaries?",
+            "Are there any signs that I’ll be able to see when you aren’t feeling well?",
+            "What’s your favourite thing about yourself?",
+            "How do you burn off steam?",
+            "What are your political views?",
+            "Are there any qualities you seek out in friends?",
+            "Who has shaped your life in the most significant way?",
+            "How do you define a strong relationship?",
+            "What is the biggest compliment I could give you?",
+            "What do you love about your life?",
+            "What kinds of social situations make you anxious?",
+            "How do you like to be cheered up or comforted?",
+            "Do you think we spend enough time together?",
+            "What is the toughest part of your life right now?",
+            "Do you like hanging out with my friends?",
+            "How important is family to you?",
+            "Do I hold you back from anything?",
+            "Do you believe in luck?",
+            "Is being smart or being kind more important to you?",
+            "What does your perfect day look like?",
+            "If you could swap lives with anyone, who would it be and why?",
+            "What does your dream home look like?",
+            "If you could paint a room any colour, which one would you choose?",
+            "What’s your coffee order?",
+            "How would you spend a million dollars?",
+            "What is on your bucket list?",
+            "What’s the best vacation you’ve ever taken?",
+            "What’s the best compliment you’ve ever received?",
+            "If you could live in a TV show, which one would you choose?",
+            "Do you have a favourite holiday?",
+            "What do you think should be a holiday that currently isn’t?",
+            "Could you set a world record for anything?",
+            "What’s the most interesting thing you’ve ever eaten?",
+            "Is there anything you absolutely will not eat?",
+            "If you were a pizza topping, which one would you be?",
+            "If you could have any kind of pet, what would you choose?",
+            "Do you have a favourite movie quote?",
+            "Do you wear slippers at home?",
+            "What’s your least favourite song?",
+            "What is one phrase you wish people would stop using?",
+            "Was there one cartoon you were obsessed with growing up?",
+            "Who would narrate an audiobook about your life?",
+            "Do you prefer matching things or pattern mixing?",
+            "If you could eat one thing for the rest of your life, what would you choose?",
+            "If you were to get a tattoo, what would you do, where and why?",
+            "What would your superhero name be?",
+            "What’s your favourite flower?",
+            "Physical books or audiobooks?",
+            "Spontaneous gifts or only for big celebrations/moments?",
+            "What’s your favourite book of all time?",
+            "What’s your favourite special occasion meal?",
+            "If you wrote a book, what would the topic be?",
+            "Are there any songs you know every single word to?",
+            "Cats or dogs?",
+            "What’s your favourite karaoke song?",
+            "What are your favourite things to do with friends?",
+            "Which animal would you be?",
+            "Have you ever faked sick and stayed home from school?",
+            "Do you have a middle name and is there a story behind it?",
+            "How do you like to relax at night?",
+            "Night owl or early bird?",
+            "What is your ideal breakfast order?",
+            "What song do you listen to the most often?",
+            "What’s something your friends think is fun but you really don’t?",
+            "Indoor or outdoor activities?",
+            "Do you have a favourite scent?",
+            "Who do you think your celebrity doppelganger is?",
+            "Do you have a favourite nickname?",
+            "What was your worst haircut?"
+        ];
+
+        // Funzione per generare una frase casuale
+        function generaFraseCasuale() {
+            // Genera un numero casuale per selezionare una frase dall'array
+            var index = Math.floor(Math.random() * frasi.length);
+            // Mostra la frase casuale
+            document.getElementById("fraseCasuale").textContent = frasi[index];
+        }
+
+        // Aggiungi un gestore di eventi al click del pulsante
+        document.getElementById("btnGeneraFrase").addEventListener("click", generaFraseCasuale);
+
+        // Array di frasi R
+        var frasiR = [
+            "What’s your love language?",
+            "When did you know you wanted to be in a relationship with me?",
+            "Do you think people were “made for each other”?",
+            "What’s your guilty pleasure?",
+            "What is the most attractive thing someone can do, in your opinion?",
+            "What’s your favourite date night movie?",
+            "How do you feel about public dispaly of affection?",
+            "How do big displays of affection make you feel?",
+            "What is your favourite love song?",
+            "What does your ideal date look like?",
+            "What’s your favourite memory of us?",
+            "Do you want to get married someday?",
+            "If you do, what does your dream wedding look like?",
+            "Do you prefer fancy date nights or casual nights out?",
+            "Is there a song that reminds you of us?",
+            "When do you feel the most beautiful?",
+            "What’s your favourite type of kiss?",
+            "What do I do that makes you smile?",
+            "How do you describe me to your friends?",
+            "What’s something I used to do that you miss?",
+            "What does falling in love feel like to you?",
+            "What’s the first thing you thought when we met?",
+            "What does romance mean to you?",
+            "How would you tell our love story?",
+            "What’s your communication style?",
+            
+        ];
+
+        // Funzione per generare una frase casuale
+        function generaFraseCasualeR() {
+            // Genera un numero casuale per selezionare una frase dall'array
+            var index = Math.floor(Math.random() * frasiR.length);
+            // Mostra la frase casuale
+            document.getElementById("fraseCasualeR").textContent = frasiR[index];
+        }
+
+        // Aggiungi un gestore di eventi al click del pulsante
+        document.getElementById("btnGeneraFraseR").addEventListener("click", generaFraseCasualeR);
+
+        // Array di frasi S
+        var frasiS = [
+            "How do you see our future playing out?",
+            "What is your favourite part of our relationship? And least favourite?",
+            "What do you want to do when you’re older?",
+            "Is there anything you would have changed about your childhood?",
+            "Does anything give you an instant headache?",
+            "Have you ever run away from a situation? What did that look like?",
+            "If you could live anywhere in the world, where would you choose?",
+            "What are your physical and emotional boundaries?",
+            "Are there any signs that I’ll be able to see when you aren’t feeling well?",
+            "What’s your favourite thing about yourself?",
+            "How do you burn off steam?",
+            "What are your political views?",
+            "Are there any qualities you seek out in friends?",
+            "Who has shaped your life in the most significant way?",
+            "How do you define a strong relationship?",
+            "What is the biggest compliment I could give you?",
+            "What do you love about your life?",
+            "What kinds of social situations make you anxious?",
+            "How do you like to be cheered up or comforted?",
+            "Do you think we spend enough time together?",
+            "What is the toughest part of your life right now?",
+            "Do you like hanging out with my friends?",
+            "How important is family to you?",
+            "Do I hold you back from anything?",
+            "Do you believe in luck?",
+            "Is being smart or being kind more important to you?"
+        ];
+
+        // Funzione per generare una frase casuale
+        function generaFraseCasualeS() {
+            // Genera un numero casuale per selezionare una frase dall'array
+            var index = Math.floor(Math.random() * frasiS.length);
+            // Mostra la frase casuale
+            document.getElementById("fraseCasualeS").textContent = frasiS[index];
+        }
+
+        // Aggiungi un gestore di eventi al click del pulsante
+        document.getElementById("btnGeneraFraseS").addEventListener("click", generaFraseCasualeS);
+        
+        // Array di frasi F
+        var frasiF = [
+            "What does your perfect day look like?",
+            "If you could swap lives with anyone, who would it be and why?",
+            "What does your dream home look like?",
+            "If you could paint a room any colour, which one would you choose?",
+            "What’s your coffee order?",
+            "How would you spend a million dollars?",
+            "What is on your bucket list?",
+            "What’s the best vacation you’ve ever taken?",
+            "What’s the best compliment you’ve ever received?",
+            "If you could live in a TV show, which one would you choose?",
+            "Do you have a favourite holiday?",
+            "What do you think should be a holiday that currently isn’t?",
+            "Could you set a world record for anything?",
+            "What’s the most interesting thing you’ve ever eaten?",
+            "Is there anything you absolutely will not eat?",
+            "If you were a pizza topping, which one would you be?",
+            "If you could have any kind of pet, what would you choose?",
+            "Do you have a favourite movie quote?",
+            "Do you wear slippers at home?",
+            "What’s your least favourite song?",
+            "What is one phrase you wish people would stop using?",
+            "Was there one cartoon you were obsessed with growing up?",
+            "Who would narrate an audiobook about your life?",
+            "Do you prefer matching things or pattern mixing?",
+            "If you could eat one thing for the rest of your life, what would you choose?",
+            "If you were to get a tattoo, what would you do, where and why?"
+        ];
+
+        // Funzione per generare una frase casuale
+        function generaFraseCasualeF() {
+            // Genera un numero casuale per selezionare una frase dall'array
+            var index = Math.floor(Math.random() * frasiF.length);
+            // Mostra la frase casuale
+            document.getElementById("fraseCasualeF").textContent = frasiF[index];
+        }
+
+        // Aggiungi un gestore di eventi al click del pulsante
+        document.getElementById("btnGeneraFraseF").addEventListener("click", generaFraseCasualeF);
+
+        // Array di frasi C
+        var frasiC = [
+            "What would your superhero name be?",
+            "What’s your favourite flower?",
+            "Physical books or audiobooks?",
+            "Spontaneous gifts or only for big celebrations/moments?",
+            "What’s your favourite book of all time?",
+            "What’s your favourite special occasion meal?",
+            "If you wrote a book, what would the topic be?",
+            "Are there any songs you know every single word to?",
+            "Cats or dogs?",
+            "What’s your favourite karaoke song?",
+            "What are your favourite things to do with friends?",
+            "Which animal would you be?",
+            "Have you ever faked sick and stayed home from school?",
+            "Do you have a middle name and is there a story behind it?",
+            "How do you like to relax at night?",
+            "Night owl or early bird?",
+            "What is your ideal breakfast order?",
+            "What song do you listen to the most often?",
+            "What’s something your friends think is fun but you really don’t?",
+            "Indoor or outdoor activities?",
+            "Do you have a favourite scent?",
+            "Who do you think your celebrity doppelganger is?",
+            "Do you have a favourite nickname?",
+            "What was your worst haircut?"
+        ];
+
+        // Funzione per generare una frase casuale
+        function generaFraseCasualeC() {
+            // Genera un numero casuale per selezionare una frase dall'array
+            var index = Math.floor(Math.random() * frasiC.length);
+            // Mostra la frase casuale
+            document.getElementById("fraseCasualeC").textContent = frasiC[index];
+        }
+
+        // Aggiungi un gestore di eventi al click del pulsante
+        document.getElementById("btnGeneraFraseC").addEventListener("click", generaFraseCasualeC);
+    </script>
+</body>
+</html>
